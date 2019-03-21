@@ -12,7 +12,7 @@ Place built versions of the following things in the same folder as the scripts:
 
 Bower is required to install the things needed for the webapp. Open the projects/webapp folder and run `bower install`
 
-Or, run install.sh
+Or, run install.sh (coming soon)
 
 ## Recon Scripts
 
