@@ -5,7 +5,6 @@ make
 cd ..
 
 # Install Amass
-mkdir amass
 wget https://github.com/OWASP/Amass/releases/download/2.9.4/amass_2.9.4_macos_amd64.zip
 unzip amass_2.9.4_macos_amd64.zip
 mv amass_2.9.4_macos_amd64 amass
