@@ -27,6 +27,8 @@ Input a TLD. Amass and subfinder are run to find any associated subdomains. DNS 
 
 ## Webapp
 
+![Webapp Screenshot](https://raw.githubusercontent.com/tonykunda/autorecon/readme.png)
+
 A quick and dirty little Bootstap/AngularJS web app for viewing the results. Enter the TLD or ASN that was scanned using either tool and click go.
 
 In terminal, navigate to the project folder and run `python -m SimpleHTTPServer`
