@@ -11,9 +11,11 @@ mv amass_2.9.4_macos_amd64 amass
 rm amass_2.9.4_macos_amd64.zip
 
 # Install Subfinder
-git clone github.com/subfinder/subfinder
+git clone https://github.com/subfinder/subfinder
 cd subfinder
-sh build.sh
+go build main.go
+mv main subfinder
+cd ..
 
 # Install Webkit2png
 git clone https://github.com/paulhammond/webkit2png
