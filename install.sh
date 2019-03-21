@@ -19,6 +19,8 @@ cd ..
 
 # Install Webkit2png
 git clone https://github.com/paulhammond/webkit2png
+cd webkit2png
+mv webkit2png webkit2png.py
 
 # Intall Python Depends
 pip install -r requirements.txt
