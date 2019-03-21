@@ -4,6 +4,7 @@ Python tools for automating internet research with a little web UI for reviewing
 
 ## Dependancies
 
+* Go
 * Python 2.7
 * pip
 * bower
