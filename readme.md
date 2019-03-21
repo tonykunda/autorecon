@@ -4,17 +4,11 @@ Python tools for automating internet research with a little web UI for reviewing
 
 ## Dependancies
 
-Git clone and then build versions of the following things in the same folder as the python scripts:
-* amass
-* masscan
-* subfinder
-* webkit2png
+* Python 2.7
+* pip
+* bower
 
-For the python, run `pip install requests netaddr`
-
-Bower is required to install the things needed for the webapp. Open the projects/webapp folder and run `bower install`
-
-Or, run install.sh (coming soon)
+Then run `install.sh`
 
 ## Recon Scripts
 
