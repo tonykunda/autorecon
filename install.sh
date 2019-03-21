@@ -20,3 +20,6 @@ pip install -r requirements.txt
 cd projects/webapp
 bower install
 cd ../../
+
+# Make tmp dir
+mkdir tmp
