@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>App Viewer</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-app="app" ng-controller="appCtrl as vm">
+    <div class="container">
+
+      <div class="row p-4">
+          <div class="col-6">
+            <form class="form-inline">
+              <div class="form-group mx-sm-3 mb-2">
+                <label for="inputPassword2" class="sr-only">Domain</label>
+                <input type="text" class="form-control" id="inputPassword2" placeholder="example.com" ng-model="vm.domain">
+              </div>
+              <button type="button" class="btn btn-primary mb-2" ng-click="vm.getDomain(vm.domain)">Get</button>
+            </form>
+          </div>
+          <div class="col-6">
+            <ul class="nav nav-pills float-right">
+              <li class="nav-item">
+                <a class="nav-link" ng-class="{'active':vm.selectedTab == 'asn'}" href="#" ng-click="vm.setTab('asn')">ASNs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" ng-class="{'active':vm.selectedTab == 'ip'}" href="#" ng-click="vm.setTab('ip')">IPs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" ng-class="{'active':vm.selectedTab == 'unresolved'}" href="#" ng-click="vm.setTab('unresolved')">Unresolved Domains</a>
+              </li>
+            </ul>
+          </div>
+          <input class="form-control" type="text" name="" value="" ng-model="vm.search" placeholder="search">
+      </div>
+
+
+        <div ng-if="vm.selectedTab == 'asn'">
+          <div class="p-4" ng-repeat="asn in vm.asnData | filter:vm.search">
+            <h4 class="float-right">{{asn.country_code}}</h4>
+            <h4>{{asn.name}}</h4>
+            <h5 class="float-right"><a href="https://bgp.he.net/AS{{asn.asn_number}}" target="_blank">{{asn.asn_number}}</a></h5>
+            <h5>{{asn.description}}</h5>
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th style="width: 50%">Prefix</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="prefix in asn.prefixes">
+                  <td>{{prefix}}</td>
+                  <td><button class="btn btn-small btn-success" copy-to-clipboard="{{vm.generateMasscan(prefix)}}">Masscan</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <hr>
+          </div>
+        </div>
+
+        <div ng-if="vm.selectedTab == 'ip'">
+          <div class="p-4" ng-repeat="ip in vm.ips | filter:vm.search">
+            <h4 class="float-right" ng-click="vm.setAsn(ip.ans_info.asn_number)"><a href="#">AS{{ip.ans_info.asn_number}}</a></h4>
+            <h4>{{ip.ip_address}}</h4>
+            <h5 class="float-right"><a href="https://bgp.he.net/AS{{asn.asn_number}}" target="_blank">{{asn.asn_number}}</a></h5>
+            <h5>{{asn.description}}</h5>
+            <table class="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th style="width: 30%">Prefix</th>
+                  <th style="width: 20%">HTTP Screenshot</th>
+                  <th style="width: 20%">HTTPS Screenshot</th>
+                  <th style="width: 20%">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="domain in ip.domains">
+                  <td>{{domain.domain}}</td>
+                  <td><img ng-if="domain.http_image" style="max-width:250px;" ng-src="../{{vm.currentDomain}}/images/{{domain.http_image}}"></td>
+                  <td><img ng-if="domain.https_image" style="max-width:250px;" ng-src="../{{vm.currentDomain}}/images/{{domain.https_image}}"></td>
+                  <td><a class="btn btn-small btn-primary" ng-repeat="port in ip.discovered_ports" target="_blank" ng-href="{{port==80 ? 'http://' : 'https://'}}{{domain.domain}}">{{port}}</a></td>
+                </tr>
+              </tbody>
+            </table>
+            <hr>
+          </div>
+        </div>
+
+        <div ng-if="vm.selectedTab == 'unresolved'">
+          <div class="p-4" ng-repeat="domain in vm.unresolvedDomains | filter:vm.search">
+            <h4>{{domain}}</h4>
+              <a href="https://web.archive.org/web/*/{{domain}}" target="_blank">Wayback Machine</a>
+            <hr>
+          </div>
+        </div>
+
+
+    </div>
+  </body>
+</html>

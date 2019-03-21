@@ -1,0 +1,11 @@
+projects/*
+/amass
+/linkfinder
+/masscan
+/subfinder
+/tmp
+/webkit2png
+/amass_output
+/WAHH_Task_Checklist.md
+!/projects/webapp
+/projects/webapp/bower_components
