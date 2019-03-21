@@ -4,7 +4,7 @@ Python tools for automating internet research with a little web UI for reviewing
 
 ## Dependancies
 
-Place built versions of the following things in the same folder as the scrips:
+Place built versions of the following things in the same folder as the scripts:
 * amass
 * masscan
 * subfinder
@@ -31,6 +31,6 @@ A quick and dirty little Bootstap/AngularJS web app for viewing the results. Ent
 
 * ASNs - Displays all discovered ASNs associated with the recon. Click the AS number on the right to view HE's info on the ASN. Click the masscan button to copy a masscan command to the clipboard to paste into the terminal for manual recon.
 
-* IP's - Displays all discovered IPs, the domains associated with them, and screenshots of the webapps running on ports 80 and 433. Click the 80 or 443 buttons to open that domain in a new tab. 
+* IP's - Displays all discovered IPs, the domains associated with them, and screenshots of the webapps running on ports 80 and 433. Click the 80 or 443 buttons to open that domain in a new tab.
 
 * Unresolved Domains - Displays all domains that could not be resolved.
