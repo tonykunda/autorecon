@@ -4,7 +4,7 @@ Python tools for automating internet research with a little web UI for reviewing
 
 ## Dependancies
 
-Place built versions of the following things in the same folder as the scripts:
+Git clone and then build versions of the following things in the same folder as the python scripts:
 * amass
 * masscan
 * subfinder
