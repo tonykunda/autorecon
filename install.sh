@@ -18,6 +18,6 @@ git clone https://github.com/paulhammond/webkit2png
 pip install -r requirements.txt
 
 # Install Webapp Things
-cd project/webapp
+cd projects/webapp
 bower install
 cd ../../
