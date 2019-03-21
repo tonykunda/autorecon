@@ -29,9 +29,13 @@ Input a TLD. Amass and subfinder are run to find any associated subdomains. DNS 
 
 ![Webapp Screenshot](https://raw.githubusercontent.com/tonykunda/autorecon/master/readme.png)
 
-A quick and dirty little Bootstap/AngularJS web app for viewing the results. Enter the TLD or ASN that was scanned using either tool and click `get`.
+A quick and dirty little Bootstap/AngularJS web app for viewing the results.
 
 In terminal, navigate to the project folder and run `python -m SimpleHTTPServer`
+
+Open `localhost:8000/webapp` in your browser
+
+Enter the TLD or ASN that was scanned using either tool and click `get`.
 
 * ASNs - Displays all discovered ASNs associated with the recon. Click the AS number on the right to view HE's info on the ASN. Click the masscan button to copy a masscan command to the clipboard to paste into the terminal for manual recon.
 
