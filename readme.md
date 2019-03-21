@@ -38,3 +38,7 @@ In terminal, navigate to the project folder and run `python -m SimpleHTTPServer`
 * IP's - Displays all discovered IPs, the domains associated with them, and screenshots of the webapps running on ports 80 and 433. Click the 80 or 443 buttons to open that domain in a new tab.
 
 * Unresolved Domains - Displays all domains that could not be resolved.
+
+## Disclaimer
+
+*These things were built quick and dirty - it evolved as I worked on it and almost everything should be refactored. Please don't judge me based on this code.*
