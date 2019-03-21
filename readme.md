@@ -10,6 +10,8 @@ Git clone and then build versions of the following things in the same folder as 
 * subfinder
 * webkit2png
 
+For the python, run `pip install requests netaddr`
+
 Bower is required to install the things needed for the webapp. Open the projects/webapp folder and run `bower install`
 
 Or, run install.sh (coming soon)
@@ -18,7 +20,7 @@ Or, run install.sh (coming soon)
 
 *asn_scan.py*
 
-Input a BGP AS number. All IPs for in every prefix are scanned, a reverse DNS lookup is run to try to find domains on the IP, ports 80 and 443 are checked, screenshots of all domains are taken. All data is saved into a project folder in JSON format.
+Input a BGP AS number. All IPs in every prefix are scanned, a reverse DNS lookup is run to try to find domains on the IP, ports 80 and 443 are checked, screenshots of all domains are taken. All data is saved into a project folder in JSON format.
 
 
 *domain_scan.py*
