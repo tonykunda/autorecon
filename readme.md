@@ -8,6 +8,7 @@ Python tools for automating internet research with a little web UI for reviewing
 * Python 2.7
 * pip
 * bower
+* wget (`brew install wget`)
 
 Then run `install.sh`
 
