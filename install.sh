@@ -18,7 +18,7 @@ mv main subfinder
 cd ..
 
 # Install Webkit2png
-git clone https://github.com/paulhammond/webkit2png
+git clone https://github.com/tonykunda/webkit2png
 cd webkit2png
 mv webkit2png webkit2png.py
 cd ..
