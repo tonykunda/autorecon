@@ -13,6 +13,7 @@ rm amass_2.9.4_macos_amd64.zip
 # Install Subfinder
 git clone https://github.com/subfinder/subfinder
 cd subfinder
+go get
 go build main.go
 mv main subfinder
 cd ..
