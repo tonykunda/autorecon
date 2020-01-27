@@ -5,17 +5,18 @@ make
 cd ..
 
 # Install Amass
-wget https://github.com/OWASP/Amass/releases/download/2.9.4/amass_2.9.4_macos_amd64.zip
-unzip amass_2.9.4_macos_amd64.zip
-mv amass_2.9.4_macos_amd64 amass
-rm amass_2.9.4_macos_amd64.zip
+wget https://github.com/OWASP/Amass/releases/download/v3.4.2/amass_v3.4.2_macos_amd64.zip
+unzip amass_v3.4.2_macos_amd64.zip
+mv amass_v3.4.2_macos_amd64 amass
+rm amass_v3.4.2_macos_amd64.zip
 
 # Install Subfinder
-git clone https://github.com/subfinder/subfinder
+mkdir subfinder
 cd subfinder
-go get
-go build main.go
-mv main subfinder
+wget https://github.com/projectdiscovery/subfinder/releases/download/v2.3.1/subfinder-darwin-amd64.tar
+tar -xvf subfinder-darwin-amd64.tar
+mv subfinder-darwin-amd64 subfinder
+rm subfinder-darwin-amd64.tar
 cd ..
 
 # Install Webkit2png
