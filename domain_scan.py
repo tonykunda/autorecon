@@ -84,10 +84,10 @@ def find_subs():
         pass
 
     print("Running Amass...")
-    print subprocess.check_output(['amass/amass', '-d', domain, '-ip', '-json', 'tmp/amass_tmp_output.json'])
+    print subprocess.check_output(['amass/amass', 'enum', '-d', domain, '-ip', '-json', 'tmp/amass_tmp_output.json'])
 
     print("Running Subfinder...")
-    print subprocess.check_output(['subfinder/subfinder', '-d', domain, '-oJ', '-o', 'tmp/subfinder_tmp_output.json'])
+    print subprocess.check_output(['subfinder/subfinder', '-d', domain, '-oJ', '-nW', '-o', 'tmp/subfinder_tmp_output.json'])
 
 def process_subs():
     print("Processing Amass Data...")
@@ -122,8 +122,16 @@ def process_subs():
 
     print("Processing Subfinder Data...")
 
+    subfinder_json = []
     with open('tmp/subfinder_tmp_output.json', 'r') as f:
-        subfinder_json = json.load(f)
+        line = f.readline()
+        count = 1
+        for cnt, line in enumerate(f):
+            try:
+                subfinder_json.append(json.loads(line)['host'])
+            except:
+                # Sometimes the JSON from amass is not valid
+                print "Unable to Parse JSON on line", str(cnt), str(line)
 
     for domain_entry in subfinder_json:
         print "processing", domain_entry
