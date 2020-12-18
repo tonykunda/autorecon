@@ -29,7 +29,7 @@ Input a TLD. Amass and subfinder are run to find any associated subdomains. DNS 
 
 A quick and dirty little Bootstap/AngularJS web app for viewing the results.
 
-In terminal, navigate to the project folder and run `python -m SimpleHTTPServer`
+In terminal, navigate to the project folder and run `python3 -m http.server`
 
 Open `localhost:8000/webapp` in your browser
 
