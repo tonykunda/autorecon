@@ -5,9 +5,9 @@ Python tools for automating internet research with a little web UI for reviewing
 ## Dependancies
 
 * Go
-* Python 2.7
+* Python 3
 * pip
-* bower
+* bower (NodeJS)
 * wget (`brew install wget`)
 
 Then run `install.sh`
