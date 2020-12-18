@@ -6,9 +6,9 @@ cd ..
 
 # Install Amass
 wget https://github.com/OWASP/Amass/releases/download/v3.10.5/amass_macos_amd64.zip
-unzip amass_v3.4.2_macos_amd64.zip
-mv amass_v3.4.2_macos_amd64 amass
-rm amass_v3.4.2_macos_amd64.zip
+unzip amass_macos_amd64.zip
+mv amass_macos_amd64 amass
+rm amass_macos_amd64.zip
 
 # Install Subfinder
 mkdir subfinder
@@ -26,7 +26,7 @@ mv webkit2png webkit2png.py
 cd ..
 
 # Intall Python Depends
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 # Install Webapp Things
 cd projects/webapp
