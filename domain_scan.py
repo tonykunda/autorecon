@@ -16,10 +16,10 @@ final_found_asns = {}
 
 
 def su(s):
-    try:
-        return s.encode('ascii','ignore')
-    except:
-        return s
+    # try:
+    #     return s.encode('ascii','ignore')
+    # except:
+    return s
 
 def process_asn(ip_address):
     # Determine if ASN Already Found
@@ -37,7 +37,7 @@ def process_asn(ip_address):
                 if prefix['prefix'] not in final_found_asns[prefix['asn']['asn']]['prefixes']:
                     final_found_asns[prefix['asn']['asn']]['prefixes'].append(prefix['prefix'])
     else:
-        for k, v in final_found_asns.iteritems():
+        for k, v in final_found_asns.items():
             for prefix in v['prefixes']:
                 if len(netaddr.all_matching_cidrs(ip_address, [prefix])):
                     found_asn = k
@@ -58,14 +58,14 @@ def check_http_port(ip_address):
     return ports_to_return
 
 def getRevDns(ip):
-    output = subprocess.check_output(['dig', '+short', '-x', ip]).split('\n')
+    output = str(subprocess.check_output(['dig', '+short', '-x', ip])).split('\n')
     del output[-1]
     output = [x[:-1] for x in output]
     return output
 
 
 
-domain = raw_input("Domain? ")
+domain = input("Domain? ")
 
 try:
     os.mkdir('projects/'+domain)
@@ -84,28 +84,27 @@ def find_subs():
         pass
 
     print("Running Amass...")
-    print subprocess.check_output(['amass/amass', 'enum', '-d', domain, '-ip', '-json', 'tmp/amass_tmp_output.json'])
+    print(subprocess.check_output(['amass/amass', 'enum', '-d', domain, '-ip', '-json', 'tmp/amass_tmp_output.json']))
 
     print("Running Subfinder...")
-    print subprocess.check_output(['subfinder/subfinder', '-d', domain, '-oJ', '-nW', '-o', 'tmp/subfinder_tmp_output.json'])
+    print(subprocess.check_output(['subfinder/subfinder', '-d', domain, '-oJ', '-nW', '-o', 'tmp/subfinder_tmp_output.json']))
 
 def process_subs():
     print("Processing Amass Data...")
 
     # TODO: Add Reverse DNS Lookup to find additional domains/apps
     amass_tmp_json = []
-    with open('tmp/amass_tmp_output.json', 'r') as f:
-        line = f.readline()
-        count = 1
-        for cnt, line in enumerate(f):
+    with open('tmp/amass_tmp_output.json') as fp:
+       for cnt, line in enumerate(fp):
             try:
-                amass_tmp_json.append(json.loads(line))
+               amass_tmp_json.append(json.loads(line))
             except:
-                # Sometimes the JSON from amass is not valid
-                print "Unable to Parse JSON on line", str(cnt), str(line)
+               # Sometimes the JSON from amass is not valid
+               print("Unable to Parse JSON on line", str(cnt), str(line))
 
+    print(amass_tmp_json)
     for domain_entry in amass_tmp_json:
-        print "processing", domain_entry
+        print("processing amass domain", domain_entry)
         for ip_data in domain_entry['addresses']:
             ip = ip_data['ip']
             if ip in final_ip_data:
@@ -117,7 +116,7 @@ def process_subs():
 
             for domain in getRevDns(ip):
                 if domain not in final_ip_data[ip]['domains']:
-                    print "adding", domain
+                    print("adding", domain)
                     final_ip_data[ip]['domains'].append(domain)
 
     print("Processing Subfinder Data...")
@@ -131,11 +130,10 @@ def process_subs():
                 subfinder_json.append(json.loads(line)['host'])
             except:
                 # Sometimes the JSON from amass is not valid
-                print "Unable to Parse JSON on line", str(cnt), str(line)
+                print("Unable to Parse JSON on line", str(cnt), str(line))
 
     for domain_entry in subfinder_json:
-        print "processing", domain_entry
-        domain_entry = domain_entry.encode('ascii','ignore')
+        print("processing", domain_entry)
         try:
             ip = socket.gethostbyname(domain_entry)
             if ip in final_ip_data:
@@ -147,15 +145,15 @@ def process_subs():
 
             for domain in getRevDns(ip):
                 if domain not in final_ip_data[ip]['domains']:
-                    print "adding", domain
+                    print("adding", domain)
                     final_ip_data[ip]['domains'].append(domain)
 
         except Exception as e:
             final_unresolved_domains.append(domain_entry)
 
     # Add domain Meta
-    for k,v in final_ip_data.iteritems():
-        print v, "V"
+    for k,v in final_ip_data.items():
+        print(v, "V")
         final_domain_list = []
         for domain in v['domains']:
             final_domain_list.append({'domain':domain, 'https_image':None, "http_image":None})
@@ -163,7 +161,7 @@ def process_subs():
 
 def getImages():
     # TODO File name for secureImages and save to json for output
-    for k, v, in final_ip_data.iteritems():
+    for k, v, in final_ip_data.items():
         for port in v['discovered_ports']:
             for domain_found_obj in v['domains']:
                 domain_found = domain_found_obj['domain']
@@ -195,4 +193,4 @@ process_subs()
 getImages()
 generateFiles()
 
-print "DONE!"
+print("DONE!")
