@@ -42,7 +42,10 @@ def process_asn(ip_address):
                 if len(netaddr.all_matching_cidrs(ip_address, [prefix])):
                     found_asn = k
 
-    return final_found_asns[found_asn]
+    if found_asn != 0:
+        return final_found_asns[found_asn]
+    else:
+        return {'asn_number': 0, 'prefixes': ['2000::/3'], 'country_code': 'US', 'name': 'Private', 'description': 'Private'}
 
 def check_http_port(ip_address):
     ip = netaddr.IPAddress(ip_address)
@@ -181,10 +184,10 @@ def generateFiles():
         json.dump(final_unresolved_domains, outfile1)
 
     with open('projects/'+domain+'/ip_data.json', 'w') as outfile2:
-        json.dump(final_ip_data.values(), outfile2)
+        json.dump(list(final_ip_data.values()), outfile2)
 
     with open('projects/'+domain+'/found_asns.json', 'w') as outfile3:
-        json.dump(final_found_asns.values(), outfile3)
+        json.dump(list(final_found_asns.values()), outfile3)
 
 
 # Kick Everything Off
